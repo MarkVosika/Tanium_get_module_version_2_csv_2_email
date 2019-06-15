@@ -120,7 +120,8 @@ def get_module_info(servers):
 				version_available.append(available_version[removed_underscore])
 			else:
 				version_available.append('Not Found')
-
+				
+		# combine all the data into one master list for writing excel rows
 		combined = sorted(zip(module, last_updated, version, version_available))
 
 		# write to excel file all the data, making first row bold
@@ -145,8 +146,10 @@ def get_module_info(servers):
 		
 	wb.save(excel_file) 	#save workbook
 
-			
+	
+#call master function with server names			
 get_module_info(['<server1>','<server2>'])
+
 
 #email the spreadsheet off
 
