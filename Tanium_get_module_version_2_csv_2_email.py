@@ -77,8 +77,6 @@ def get_module_info(servers):
 					if k == "last_updated":	
 						last_updated.append(v)
 
-		
-
 		#hit Tanium's site and parse the xml to get available module versions
 		underscore_removed = []
 		available_version = {}
@@ -100,7 +98,10 @@ def get_module_info(servers):
 		#convert xml to a dictionary  
 		xml2dict =  xmltodict.parse(resp.content)
 
-		"""cycle through dict to get down to the module information, compare name of module for matches from the module list (after removing underscore from name), append to a new dictionary match hits and the availble module version (encoding in ascii to remove the u')
+		"""
+		cycle through dict to get down to the module information, 
+		compare name of module for matches from the module list (after removing underscore from name), 
+		append to a new dictionary match hits and the availble module version (encoding in ascii to remove the u')
 		""" 
 		for k,v in xml2dict['content_manifest'].items():
 			for list in v:
@@ -112,7 +113,9 @@ def get_module_info(servers):
 								available_version[v] = (list['version'].encode('ascii'))
 
 		"""
-		cycle through the module list (removing underscore from name) and compare that to the dictionary key name, if a match is found append the value (version) to new list, otherwise append 'Not Found'.  Essenstially keeping the lists lined up.
+		cycle through the module list (removing underscore from name) and compare that to the dictionary key name, 
+		if a match is found append the value (version) to new list, otherwise append 'Not Found'.  
+		Essenstially keeping the lists lined up.
 		"""  					
 		for name in module:
 			removed_underscore = name.replace('_', ' ')
